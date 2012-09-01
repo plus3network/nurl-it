@@ -1,5 +1,5 @@
 {
-  "name": "nurl",
+  "name": "nurl-it",
   "version": "0.0.1",
   "description": "A command line tool for displaying HTTP request and responses. It's inspired by http://hurl.it.",
   "main": "index.js",
@@ -8,10 +8,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/plus3network/nurl.git"
+    "url": "git://github.com/plus3network/nurl-it.git"
   },
   "keywords": [
-    "nurl",
+    "nurl-it",
     "hurl",
     "hurl.it",
     "http",
