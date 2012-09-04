@@ -65,17 +65,20 @@ if (program.argv.header) {
   options.headers = extractHeaders(program.argv.header);
 }
 
+var render = module.exports.render = function (err, res, body) {
 
-request(options, function (err, res, body) {
   if(err) {
     return console.error(err.stack);
   }
 
   console.log("\nRequest:\n");
-  var reqMethodStr = res.request.method+' '+res.request.path+' HTTP/1.1';
+
   // Workaround for weird bug with colors module.
+  var reqMethodStr = res.request.method+' '+res.request.path+' HTTP/1.1';
   console.log((useColor)? reqMethodStr.white : reqMethodStr);
+
   console.log('host'.cyan+': '+res.request.host.magenta);
+
   _.each(res.request.headers, function (val,key) {
     if (val) {
       console.log(key.toLowerCase().cyan+': '+(val+'').magenta);
@@ -87,9 +90,11 @@ request(options, function (err, res, body) {
   }
   
   console.log("\nResponse:\n");
-  var resMethodString = 'HTTP/'+res.httpVersionMajor+'.'+res.httpVersionMinor+' '+res.statusCode+' '+res.request.httpModule.STATUS_CODES[res.statusCode];
+
   // Workaround for weird bug with colors module
+  var resMethodString = 'HTTP/'+res.httpVersionMajor+'.'+res.httpVersionMinor+' '+res.statusCode+' '+res.request.httpModule.STATUS_CODES[res.statusCode];
   console.log((useColor)? resMethodString.white : resMethodString); 
+
   _.each(res.headers, function (val, key) { 
     if (val) {
       console.log(key.cyan+': '+(val+'').magenta);
@@ -99,4 +104,6 @@ request(options, function (err, res, body) {
   if (body) { 
     console.log("\n"+body.yellow);
   }
-});
+}
+
+request(options, render);
